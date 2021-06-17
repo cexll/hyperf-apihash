@@ -29,7 +29,7 @@ class ApiHash
         $string = $aes->randomString();
         $rsa->setPrivatePem($path);
         $hashString = $rsa->privateHash($string);
-        $aesHash = $aes->hash($data, $hashString);
+        $aesHash = $aes->hash($data, $string);
         return [
             'body' => $aesHash,
             'key' => $hashString
@@ -65,7 +65,7 @@ class ApiHash
         $rsa = new RSA();
         $rsa->setPublicKey($path);
         $hashString = $rsa->publicHash($string);
-        $aesHash = $aes->hash($data, $hashString);
+        $aesHash = $aes->hash($data, $string);
         return [
             'body' => $aesHash,
             'key' => $hashString
